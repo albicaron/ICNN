@@ -1,10 +1,21 @@
-CATE:
+Train CATE:
 
-S-DNN - RMSE: 1.99, SE: 2.7818
-T-DNN - RMSE: 1.1601, SE: 1.2027
-Causal Forest - RMSE: 1.4631, SE: 0.6526
-R-DNN - RMSE: 1.8892, SE: 1.2378
-R-sep-DNN - RMSE: 1.7144, SE: 0.1986
-R-NAM - RMSE: 0.8178, SE: 0.4622
-R-sep-NAM - RMSE: 0.4139, SE: 0.4348
-R-sep-mix - RMSE: 4.4229, SE: 8.7144
+S-DNN - RMSE: 1.7563, SE: nan
+T-DNN - RMSE: 1.1095, SE: nan
+Causal Forest - RMSE: 1.3438, SE: nan
+R-DNN - RMSE: 1.7786, SE: nan
+R-sep-DNN - RMSE: 1.6644, SE: nan
+R-NAM - RMSE: 1.6644, SE: nan
+R-sep-NAM - RMSE: nan, SE: nan
+R-sep-mix - RMSE: nan, SE: nan
+
+Test CATE:
+
+S-DNN - RMSE: 1.8546, SE: nan
+T-DNN - RMSE: 1.1479, SE: nan
+Causal Forest - RMSE: 1.3984, SE: nan
+R-DNN - RMSE: 1.7788, SE: nan
+R-sep-DNN - RMSE: 1.6652, SE: nan
+R-NAM - RMSE: 1.6652, SE: nan
+R-sep-NAM - RMSE: nan, SE: nan
+R-sep-mix - RMSE: nan, SE: nan
