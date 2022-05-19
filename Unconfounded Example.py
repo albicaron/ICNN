@@ -42,13 +42,13 @@ for b in range(B):
     ITE_train, ITE_test = tr_te_split(ITE, split)
 
     # Models unpacking
-    mod_RDNN = R_DNN(D_in=X.shape[1], D_hid=[20, 20], D_trt=2)
-    mod_sep_RDNN = R_sep_DNN(D_in=X.shape[1], H_mu=[20, 20], H_tau=[20], D_out=1)
+    mod_RDNN = R_DNN(D_in=X.shape[1], D_hid=[50, 50], D_trt=2)
+    mod_sep_RDNN = R_sep_DNN(D_in=X.shape[1], H_mu=[50, 50], H_tau=[20], D_out=1)
 
     mod_RNAM = R_NAM(n_blocks=P, D_hid=[20, 20], D_trt=2)
     mod_sep_RNAM = R_sep_NAM(n_blocks=P, H_mu=[20, 20], H_tau=[20], D_out=1)
 
-    mod_Rmix = R_mix_NAM_DNN(D_in=X.shape[1], n_blocks=P, H_mu=[20, 20], H_tau=[20], D_out=1)
+    mod_Rmix = R_mix_NAM_DNN(D_in=X.shape[1], n_blocks=P, H_mu=[50, 50], H_tau=[20], D_out=1)
 
     # Define optimizers
     optimizer_RDNN = torch.optim.Adam(mod_RDNN.parameters(), lr=0.01)
@@ -71,7 +71,7 @@ for b in range(B):
 
     ###### S-NN
     size = A.shape[0]
-    mod_S = MLPRegressor(hidden_layer_sizes=(20, 20), solver='adam', max_iter=2000)
+    mod_S = MLPRegressor(hidden_layer_sizes=(50, 50), solver='adam', max_iter=2000)
     mod_S.fit(X=np.c_[X_train, A_train], y=Y_train)
 
     pred_1 = mod_S.predict(X=np.c_[X, np.ones(size)])
@@ -82,7 +82,7 @@ for b in range(B):
 
 
     ###### T-NN
-    mod_T = MLPRegressor(hidden_layer_sizes=(20, 20), solver='adam', max_iter=2000)
+    mod_T = MLPRegressor(hidden_layer_sizes=(50, 50), solver='adam', max_iter=2000)
     mod_dict = {}
 
     for i in range(2):
