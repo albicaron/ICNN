@@ -271,7 +271,7 @@ for i in range(1):
 
     plt.plot(
         x[:, 0].detach().numpy(),
-        np.mean(special_y, axis=1), label='Estimated')
+        np.mean(special_y, axis=1), label='Estimated', c='r')
     plt.plot(x[:, 0], 0.8*x[:, 0]**2, '--', c='b', label='True')
     plt.fill_between(x[:, 0].detach().numpy(), np.mean(special_y, axis=1) - 2*np.std(special_y, axis=1),
                      np.mean(special_y, axis=1) + 2*np.std(special_y, axis=1),
