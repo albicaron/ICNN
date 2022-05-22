@@ -46,7 +46,7 @@ for b in range(B):
     mod_sep_RDNN = R_sep_DNN(D_in=X.shape[1], H_mu=[50, 50], H_tau=[20], D_out=1)
 
     mod_RNAM = R_NAM(n_blocks=P, D_hid=[20, 20], D_trt=2)
-    mod_sep_RNAM = R_sep_NAM(n_blocks=P, H_mu=[20, 20], H_tau=[20], D_out=1)
+    mod_sep_RNAM = R_sep_NAM(n_blocks=P, H_mu=[20, 20], H_tau=[50], D_out=1)
 
     mod_Rmix = R_mix_NAM_DNN(D_in=X.shape[1], n_blocks=P, H_mu=[50, 50], H_tau=[20], D_out=1)
 
