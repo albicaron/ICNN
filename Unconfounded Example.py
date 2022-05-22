@@ -173,8 +173,8 @@ for b in range(B):
         mod_RNAM.eval()
         pred_ITE_A_RNAM = mod_RNAM(X)[:, 1].reshape(-1)
 
-    RMSE_mod_Train['R-NAM'].append(RMSE(ITE_train, pred_ITE_A_sep_RDNN[split]))
-    RMSE_mod_Test['R-NAM'].append(RMSE(ITE_test, pred_ITE_A_sep_RDNN[~split]))
+    RMSE_mod_Train['R-NAM'].append(RMSE(ITE_train, pred_ITE_A_RNAM[split]))
+    RMSE_mod_Test['R-NAM'].append(RMSE(ITE_test, pred_ITE_A_RNAM[~split]))
 
 
     ###### R-sep-NAM

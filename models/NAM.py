@@ -54,17 +54,15 @@ class R_sep_DNN(torch.nn.Module):
         super().__init__()
 
         self.features_mu = torch.nn.Sequential(
-            torch.nn.Dropout(0.3),
             torch.nn.Linear(D_in, H_mu[0]),
             torch.nn.ReLU(),
-            torch.nn.Dropout(0.3),
+            torch.nn.Dropout(0.2),
             torch.nn.Linear(H_mu[0], H_mu[1]),
             torch.nn.ReLU(),
             torch.nn.Linear(H_mu[1], D_out),
         )
 
         self.features_tau = torch.nn.Sequential(
-            torch.nn.Dropout(0.3),
             torch.nn.Linear(D_in, H_tau[0]),
             torch.nn.Softplus(),
             torch.nn.Dropout(0.2),
@@ -84,7 +82,6 @@ class R_DNN(torch.nn.Module):
         super().__init__()
 
         self.features = torch.nn.Sequential(
-            torch.nn.Dropout(0.2),
             torch.nn.Linear(D_in, D_hid[0]),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.2),
@@ -155,7 +152,6 @@ class R_mix_NAM_DNN(torch.nn.Module):
         super().__init__()
 
         self.features_mu = torch.nn.Sequential(
-            torch.nn.Dropout(0.2),
             torch.nn.Linear(D_in, H_mu[0]),
             torch.nn.ReLU(),
             torch.nn.Linear(H_mu[0], H_mu[1]),
