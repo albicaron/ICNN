@@ -11,6 +11,11 @@ import torch
 import warnings
 warnings.filterwarnings("ignore")
 
+torch.manual_seed(13)
+torch.cuda.manual_seed(13)
+np.random.seed(13)
+
+
 # Load data
 print(os.getcwd())
 ACTG_df = pd.read_csv('./Data/ACTG175.csv')
@@ -57,7 +62,7 @@ with torch.no_grad():
 # Plot Mediating Effects
 # R-sep-NAM visualizer on tau_A and tau_M for interpretability
 import matplotlib.pyplot as plt
-plt.style.use('ggplot')
+plt.style.use('seaborn-whitegrid')
 plt.rcParams.update({'font.size': 10})
 
 x = torch.linspace(-3, 3, 5000).reshape(-1, 1)
@@ -81,10 +86,10 @@ for i, name in zip(range(P), col_names):
 
     if i < 6:
         axs[0, i].plot(x[:, 0].detach().numpy(),
-                       np.mean(special_y, axis=1), label='Estimated', c='r')
+                       np.mean(special_y, axis=1), label='Estimated', c='m')
         axs[0, i].fill_between(x[:, 0].detach().numpy(), np.mean(special_y, axis=1) - 1.96*np.std(special_y, axis=1),
                                    np.mean(special_y, axis=1) + 1.96*np.std(special_y, axis=1),
-                                   color='grey', alpha=0.4, label='MC bands')
+                                   color='grey', alpha=0.6, label='MC bands')
         axs[0, i].set_title(name)
         # axs[0, i].legend(bbox_to_anchor=(0.45, 1.01))
 
@@ -95,10 +100,10 @@ for i, name in zip(range(P), col_names):
 
     elif i >= 6:
         axs[1, 11-i].plot(x[:, 0].detach().numpy(),
-                          np.mean(special_y, axis=1), label='Estimated', c='r')
+                          np.mean(special_y, axis=1), label='Estimated', c='m')
         axs[1, 11-i].fill_between(x[:, 0].detach().numpy(), np.mean(special_y, axis=1) - 1.96 * np.std(special_y, axis=1),
                                    np.mean(special_y, axis=1) + 1.96 * np.std(special_y, axis=1),
-                                   color='grey', alpha=0.4, label='MC bands')
+                                   color='grey', alpha=0.6, label='MC bands')
         axs[1, 11-i].set_title(name)
         # axs[1, i].legend(bbox_to_anchor=(0.45, 1.01))
 
@@ -109,7 +114,7 @@ for i, name in zip(range(P), col_names):
 axs[0, 0].set(ylabel='CATE')
 axs[1, 0].set(ylabel='CATE')
 
-axs[0, 1].set_yticks(np.linspace(-0.4940, -0.4900, num=6))
+# axs[0, 1].set_yticks(np.linspace(-0.4940, -0.4900, num=6))
 
 for ax in axs.flat:
     ax.set(xlabel='X')
