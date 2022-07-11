@@ -11,9 +11,9 @@ import torch
 import warnings
 warnings.filterwarnings("ignore")
 
-torch.manual_seed(13)
-torch.cuda.manual_seed(13)
-np.random.seed(13)
+torch.manual_seed(23)
+torch.cuda.manual_seed(23)
+np.random.seed(23)
 
 
 # Load data
@@ -30,14 +30,14 @@ col_names = list(ACTG_df.drop(columns=['Y', 'treat']).columns)
 
 # Standardize Y(= difference in cell counts after 20+/-5 weeks from baseline) and continuous X
 scaler = StandardScaler()
-# Y_scale = scaler.fit_transform(Y.reshape(-1, 1))
+Y = scaler.fit_transform(Y.reshape(-1, 1))
 X[:, (0, 1, 7)] = scaler.fit_transform(X[:, (0, 1, 7)])
 
 N, P = X.shape
 
 # ICNN model
-mod_ICNN = R_sep_NAM(n_blocks=P, H_mu=[5, 5], H_tau=[2], D_out=1)
-optimizer_ICNN = torch.optim.Adam(mod_ICNN.parameters(), lr=0.5)
+mod_ICNN = R_sep_NAM(n_blocks=P, H_mu=[20, 20], H_tau=[50], D_out=1)
+optimizer_ICNN = torch.optim.Adam(mod_ICNN.parameters(), lr=0.1)
 criterion_ICNN = torch.nn.MSELoss()
 
 ###### R-sep-NZM
@@ -49,7 +49,7 @@ for i in range(2000):
     loss = criterion_ICNN(torch.Tensor(Y).float(), y_pred.reshape(-1, 1))
     loss.backward()
     optimizer_ICNN.step()
-    if i % 100 == 0:
+    if i % 500 == 0:
         print(loss)
 
 # Pred out of sample
@@ -57,6 +57,10 @@ with torch.no_grad():
 
     mod_ICNN.eval()
     _, pred_ITE_A_ICNN = mod_ICNN(torch.Tensor(X))
+
+
+import seaborn as sns
+sns.distplot(pred_ITE_A_ICNN)
 
 
 # Plot Mediating Effects
